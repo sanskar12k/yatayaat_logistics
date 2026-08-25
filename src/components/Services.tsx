@@ -93,7 +93,7 @@ export const Services = () => {
   };
 
   return (
-    <section className="py-24 bg-muted/30">
+    <section id="services" className="scroll-mt-20 py-24 bg-muted/30">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-16 animate-fade-in">

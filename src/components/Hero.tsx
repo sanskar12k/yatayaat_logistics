@@ -1,12 +1,33 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Package } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import heroImage from "@/assets/hero-logistics.jpg";
 import { useState } from "react";
 import { QuoteRequestForm } from "@/components/QuoteRequestForm";
 
 export function Hero() {
     const [quoteFormOpen, setQuoteFormOpen] = useState(false);
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const handleExploreServices = (event: React.MouseEvent<HTMLAnchorElement>) => {
+      event.preventDefault();
+      const scrollToServices = () => {
+        const servicesSection = document.getElementById("services");
+        if (!servicesSection) return;
+
+        const headerOffset = 80;
+        const sectionTop = servicesSection.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({ top: sectionTop - headerOffset, behavior: "smooth" });
+      };
+
+      if (location.pathname === "/") {
+        scrollToServices();
+      } else {
+        navigate("/#services");
+        window.setTimeout(scrollToServices, 100);
+      }
+    };
   return (
     <section className="relative min-h-[600px] flex items-center">
       <div
@@ -34,7 +55,7 @@ export function Hero() {
                 Request a Quote
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
-            <Link to="/#services">
+            <Link to="/#services" onClick={handleExploreServices}>
               <Button size="lg" variant="outline" className="bg-white/10 backdrop-blur text-white border-white/30 hover:bg-white/20">
                 Explore Services
               </Button>

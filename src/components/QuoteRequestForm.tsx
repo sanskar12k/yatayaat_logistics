@@ -31,6 +31,11 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Upload, X, Loader2 } from "lucide-react";
 
+const nonNegativeNumber = z.string().optional().refine(
+  (value) => value === "" || Number(value) >= 0,
+  "Value cannot be negative"
+);
+
 const quoteFormSchema = z.object({
   customer_name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Invalid email address"),
@@ -39,10 +44,9 @@ const quoteFormSchema = z.object({
   service_type: z.string().min(1, "Please select a service"),
   origin: z.string().min(2, "Origin is required"),
   destination: z.string().min(2, "Destination is required"),
-  weight: z.string().optional(),
-  dimensions: z.string().optional(),
-  shipment_value: z.string().optional(),
-  quantity: z.string().optional(),
+  weight: nonNegativeNumber,
+  shipment_value: nonNegativeNumber,
+  quantity: nonNegativeNumber,
   special_requirements: z.string().optional(),
   preferences: z.string().optional(),
 });
@@ -69,7 +73,6 @@ export const QuoteRequestForm = ({ open, onOpenChange, defaultService }: QuoteRe
       origin: "",
       destination: "",
       weight: "",
-      dimensions: "",
       shipment_value: "",
       quantity: "",
       special_requirements: "",
@@ -262,7 +265,7 @@ export const QuoteRequestForm = ({ open, onOpenChange, defaultService }: QuoteRe
                     <FormItem>
                       <FormLabel>Quantity (Pieces/Packages)</FormLabel>
                       <FormControl>
-                        <Input type="number" placeholder="10" {...field} />
+                        <Input type="number" min="0" placeholder="10" onWheel={(event) => event.currentTarget.blur()} {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -301,20 +304,7 @@ export const QuoteRequestForm = ({ open, onOpenChange, defaultService }: QuoteRe
                     <FormItem>
                       <FormLabel>Weight (kg)</FormLabel>
                       <FormControl>
-                        <Input type="number" step="0.01" placeholder="100.5" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="dimensions"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Dimensions (L x W x H in cm)</FormLabel>
-                      <FormControl>
-                        <Input placeholder="50 x 40 x 30" {...field} />
+                        <Input type="number" min="0" step="0.01" placeholder="100.5" onWheel={(event) => event.currentTarget.blur()} {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -327,7 +317,7 @@ export const QuoteRequestForm = ({ open, onOpenChange, defaultService }: QuoteRe
                     <FormItem>
                       <FormLabel>Shipment Value (₹)</FormLabel>
                       <FormControl>
-                        <Input type="number" step="0.01" placeholder="50000" {...field} />
+                        <Input type="number" min="0" placeholder="50000" onWheel={(event) => event.currentTarget.blur()} {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
