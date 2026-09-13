@@ -9,7 +9,8 @@ import {
   Gavel, 
   FileText, 
   Handshake,
-  PackageCheck
+  PackageCheck,
+  PackageSearch
 } from "lucide-react";
 import { ServiceDetailsDialog } from "./ServiceDetailsDialog";
 import { QuoteRequestForm } from "./QuoteRequestForm";
@@ -19,14 +20,14 @@ const services = [
     icon: PackageCheck,
     title: "Small LTL - All Pin Codes",
     description: "Less Than Truckload service covering every pin code in India. Efficient, economical shipping for smaller consignments.",
-    features: ["Door-to-door delivery", "Real-time tracking", "Insurance coverage", "Pan-India coverage"],
+    features: ["Door-to-door delivery", "Real-time tracking", "Pan-India coverage"],
     color: "text-primary"
   },
   {
     icon: Package,
     title: "Packers & Movers",
     description: "Professional packing and moving services for household, office, and commercial relocations of all sizes.",
-    features: ["Expert packing", "Safe handling", "Full insurance", "Bike & car transport"],
+    features: ["Expert packing", "Safe handling", "Bike & car transport", "Bangladesh Part Load and Full Load", "Pan India to Benapole Customs & Door Delivery"],
     color: "text-secondary"
   },
   {
@@ -37,13 +38,13 @@ const services = [
     color: "text-success",
     highlight: true
   },
-  // {
-  //   icon: Plane,
-  //   title: "Air Freight Services",
-  //   description: "Express air cargo from Kolkata to pan-India with guaranteed delivery timelines.",
-  //   features: ["Tier-1: 24 hours", "Tier-2: 48 hours", "Tier-3: 72 hours", "Priority handling"],
-  //   color: "text-primary"
-  // },
+  {
+    icon: Plane,
+    title: "Air Freight Services",
+    description: "Express air cargo from Kolkata to pan-India with guaranteed delivery timelines.",
+    features: ["Tier-1: 24 hours", "Tier-2: 48 hours", "Tier-3: 72 hours", "Priority handling"],
+    color: "text-primary"
+  },
   {
     icon: Train,
     title: "Railway Services",
@@ -64,15 +65,21 @@ const services = [
     description: "Comprehensive logistics solutions for large-scale projects and government tenders.",
     features: ["Custom solutions", "Project management", "End-to-end service", "Compliance support"],
     color: "text-primary"
+  },
+  {
+    icon: Handshake,
+    title: "Contractual Services",
+    description: "Monthly and weekly contracts for all transportation needs with specialized solutions.",
+    features: ["First Mile", "Last Mile", "Middle Mile", "Milk Run", "Custom contracts"],
+    color: "text-secondary",
+    highlight: true
+  },
+  {
+    icon: PackageSearch,
+    title: "Courier and E-Commerce Domestic",
+    description: "Reliable courier services for packages and e-commerce with fast delivery options.",
+    features: ["Same-day delivery", "Next-day delivery"],
   }
-  // {
-  //   icon: Handshake,
-  //   title: "Contractual Services",
-  //   description: "Monthly and weekly contracts for all transportation needs with specialized solutions.",
-  //   features: ["First Mile", "Last Mile", "Middle Mile", "Milk Run", "Custom contracts"],
-  //   color: "text-secondary",
-  //   highlight: true
-  // }
 ];
 
 export const Services = () => {
